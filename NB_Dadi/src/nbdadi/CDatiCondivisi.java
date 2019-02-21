@@ -5,6 +5,8 @@
  */
 package nbdadi;
 
+import java.util.concurrent.Semaphore;
+
 /**
  * @author Tosetti Luca
  *
@@ -33,6 +35,8 @@ public class CDatiCondivisi {
      */
     private int terzoDado;
 
+    private final Semaphore terminationSempahore;
+
     /**
      * @brief: Metodo costruttore con parametri che inizializza la slot machine
      *
@@ -54,6 +58,8 @@ public class CDatiCondivisi {
         this.secondoDado = secondoDado;
         this.terzoDado = terzoDado;
         this.Elementi = 0;
+
+        this.terminationSempahore = new Semaphore(0);
     }
 
     /**
@@ -73,6 +79,8 @@ public class CDatiCondivisi {
             schermo[i] = "";
         }
         this.Elementi = 0;
+
+        this.terminationSempahore = new Semaphore(0);
     }
     /**
      * @brief Metodo get dell'attributo Elementi
@@ -209,4 +217,7 @@ public class CDatiCondivisi {
         Elementi++;
     }
 
+    public Semaphore getTerminationSempahore() {
+        return terminationSempahore;
+    }
 }

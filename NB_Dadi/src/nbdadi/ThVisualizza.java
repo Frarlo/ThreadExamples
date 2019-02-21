@@ -84,6 +84,7 @@ public class ThVisualizza extends Thread {
             Logger.getLogger(ThVisualizza.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+        PtrDati.getTerminationSempahore().release();
     }
 
         /**

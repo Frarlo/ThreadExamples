@@ -99,6 +99,7 @@ public class ThDadi extends Thread {
 
         }
 
+        PtrDati.getTerminationSempahore().release();
     }
 
     void termina() {
