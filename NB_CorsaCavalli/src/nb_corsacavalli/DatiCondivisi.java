@@ -22,35 +22,35 @@ public class DatiCondivisi {
      * Dichiarazione dell'attributo che memorizza il numero di galoppi del
      * cavallo1
      */
-    int nClop1;
+    private int nClop1;
     /**
      * @author Galimberti_Francesco
      *
      * Dichiarazione dell'attributo che memorizza il numero di galoppi del
      * cavallo2
      */
-    int nClop2;
+    private int nClop2;
     /**
      * @author Galimberti_Francesco
      *
      * Dichiarazione dell'attributo che memorizza il numero di galoppi del
      * cavallo3
      */
-    int nClop3;
+    private int nClop3;
     /**
      * @author Galimberti_Francesco
      *
      * Dichiarazione dell'attributo che memorizza il numero di galoppi del
      * cavallo4
      */
-    int nClop4;
+    private int nClop4;
     /**
      * @author Galimberti_Francesco
      *
      * Dichiarazione dell'attributo che memorizza il numero di galoppi del
      * cavallo5
      */
-    int nClop5;
+    private int nClop5;
 
     /**
      * @author Galimberti_Francesco
@@ -58,16 +58,16 @@ public class DatiCondivisi {
      * Dichiarazione di un vettore di stringhe nel quale vengono salvati gli
      * output dei Thread cavalli
      */
-    String[] schermo;
+    private String[] schermo;
     /**
      * @author Galimberti_Francesco
      *
      * Dichiarazione dell'attrbuto che memorizza la prima cella libera
      * dell'attributo schermo
      */
-    int primaPosizioneLibera;
+    private int primaPosizioneLibera;
 
-    final Semaphore interruptionSempahore;
+    private final Semaphore interruptionSempahore;
 
     /**
      * @author Galimberti_Francesco
@@ -76,7 +76,7 @@ public class DatiCondivisi {
      * galoppi di ogni cavallo e la prima posizione disponibile, inoltre
      * inizializza la dimensione del vettore di stringhe
      */
-    public DatiCondivisi() {
+    DatiCondivisi() {
         this.nClop1 = 0;
         this.nClop2 = 0;
         this.nClop3 = 0;
@@ -97,7 +97,7 @@ public class DatiCondivisi {
      * @return nClop1 viene restituito un numero intero che indica il numero di
      * galoppi del cavallo1
      */
-    public int getnClop1() {
+    public synchronized int getnClop1() {
         return nClop1;
     }
 
@@ -109,7 +109,7 @@ public class DatiCondivisi {
      * @return nClop2 viene restituito un numero intero che indica il numero di
      * galoppi del cavallo2
      */
-    public int getnClop2() {
+    public synchronized int getnClop2() {
         return nClop2;
     }
 
@@ -121,7 +121,7 @@ public class DatiCondivisi {
      * @return nClop3 viene restituito un numero intero che indica il numero di
      * galoppi del cavallo3
      */
-    public int getnClop3() {
+    public synchronized int getnClop3() {
         return nClop3;
     }
 
@@ -133,7 +133,7 @@ public class DatiCondivisi {
      * @return nClop4 viene restituito un numero intero che indica il numero di
      * galoppi del cavallo4
      */
-    public int getnClop4() {
+    public synchronized int getnClop4() {
         return nClop4;
     }
 
@@ -145,7 +145,7 @@ public class DatiCondivisi {
      * @return nClop5 viene restituito un numero intero che indica il numero di
      * galoppi del cavallo5
      */
-    public int getnClop5() {
+    public synchronized int getnClop5() {
         return nClop5;
     }
 
@@ -158,7 +158,7 @@ public class DatiCondivisi {
      * con cui modificare il valore dell'attributo nClop1, che corrisponde al
      * numero di galoppi del cavallo1
      */
-    public void setnClop1(int nClop1) {
+    public synchronized void setnClop1(int nClop1) {
         this.nClop1 = nClop1;
     }
 
@@ -171,7 +171,7 @@ public class DatiCondivisi {
      * con cui modificare il valore dell'attributo nClop2, che corrisponde al
      * numero di galoppi del cavallo2
      */
-    public void setnClop2(int nClop2) {
+    public synchronized void setnClop2(int nClop2) {
         this.nClop2 = nClop2;
     }
 
@@ -184,7 +184,7 @@ public class DatiCondivisi {
      * con cui modificare il valore dell'attributo nClop3, che corrisponde al
      * numero di galoppi del cavallo3
      */
-    public void setnClop3(int nClop3) {
+    public synchronized void setnClop3(int nClop3) {
         this.nClop3 = nClop3;
     }
 
@@ -197,7 +197,7 @@ public class DatiCondivisi {
      * con cui modificare il valore dell'attributo nClop4, che corrisponde al
      * numero di galoppi del cavallo4
      */
-    public void setnClop4(int nClop4) {
+    public synchronized void setnClop4(int nClop4) {
         this.nClop4 = nClop4;
     }
 
@@ -210,7 +210,7 @@ public class DatiCondivisi {
      * con cui modificare il valore dell'attributo nClop5, che corrisponde al
      * numero di galoppi del cavallo5
      */
-    public void setnClop5(int nClop5) {
+    public synchronized void setnClop5(int nClop5) {
         this.nClop5 = nClop5;
     }
 
@@ -225,7 +225,7 @@ public class DatiCondivisi {
      * salvata nel vettore "schermo" nella posizione indicata dall'attributo
      * primaPosizioneLibera
      */
-    public void aggiungiLinea(String s) {
+    public synchronized void aggiungiLinea(String s) {
         schermo[primaPosizioneLibera] = s;
         primaPosizioneLibera++;
     }
@@ -236,7 +236,7 @@ public class DatiCondivisi {
      * @brief Metodo che permette di visualizzare tutto il contenuto dello
      * schermo
      */
-    public void visualizzaLinee() {
+    public synchronized void visualizzaLinee() {
         for (int i = 0; i < this.primaPosizioneLibera; i++) {
             System.out.println(schermo[i]);
         }
