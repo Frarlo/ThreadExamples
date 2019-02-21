@@ -10,24 +10,24 @@ import java.util.concurrent.Semaphore;
 /**
  *
  * @author Princess Joy Padua
- * 
+ *
  */
 public class DatiCondivisi {
     /**
      * @author Princess Joy Padua 
-     * 
+     *
      * Creo variabili di tipo int che mi vanno a contare i suoni effettuati dai thread.
-     * 
+     *
      */
-    int contaDIN=0,contaDON=0,contaDAN=0;
-    
-    int maxElem=10000000;
-    String schermo[];
-    int p;
+    private int contaDIN = 0,contaDON = 0,contaDAN = 0;
+
+    private int maxElem = 10000000;
+    private String schermo[];
+    private int p;
 
     private final Semaphore terminationSemaphore;
 
-    public DatiCondivisi() {
+    DatiCondivisi() {
         this.schermo=new String [maxElem];
         this.p=0;
         this.terminationSemaphore = new Semaphore(0);
@@ -65,15 +65,15 @@ public class DatiCondivisi {
     public void setContaDAN(int contaDAN) {
         this.contaDAN = contaDAN;
     }
-    
-    
-    
+
+
+
     /**
-     * 
+     *
      * @param c Indico la scelta effettuata dall'untete fatta nel main
-     * 
+     *
      * @return indica se hai vinto o no.
-     * 
+     *
      */
     public String verificaSeHaiVinto(int c) {
         String x="Hai Perso";
