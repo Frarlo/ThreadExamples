@@ -5,6 +5,8 @@
  */
 package nbdindondan;
 
+import java.util.concurrent.Semaphore;
+
 /**
  *
  * @author Princess Joy Padua
@@ -23,9 +25,12 @@ public class DatiCondivisi {
     String schermo[];
     int p;
 
+    private final Semaphore terminationSemaphore;
+
     public DatiCondivisi() {
         this.schermo=new String [maxElem];
         this.p=0;
+        this.terminationSemaphore = new Semaphore(0);
     }
 
     public DatiCondivisi(int contaDIN, int contaDON, int contaDAN) {
@@ -34,6 +39,7 @@ public class DatiCondivisi {
         this.contaDAN = contaDAN;
         this.schermo=new String [maxElem];
         this.p=0;
+        this.terminationSemaphore = new Semaphore(0);
     }
 
     public int getContaDIN() {
@@ -96,5 +102,9 @@ public class DatiCondivisi {
                 System.out.println("");
         }
         System.out.println("\n-------------------------------");
+    }
+
+    public Semaphore getTerminationSemaphore() {
+        return terminationSemaphore;
     }
 }

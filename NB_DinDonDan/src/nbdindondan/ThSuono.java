@@ -102,5 +102,7 @@ public class ThSuono extends Thread {
         } catch (InterruptedException ex) {
 
         }
+
+        ptrdati.getTerminationSemaphore().release();
     }
 }

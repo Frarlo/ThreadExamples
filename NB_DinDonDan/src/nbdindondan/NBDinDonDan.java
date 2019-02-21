@@ -60,11 +60,8 @@ public class NBDinDonDan {
             th1.interrupt();
             th2.interrupt();
             th3.interrupt();
-            
-            th1.join();
-            th2.join();
-            th3.join();
-            
+
+            dati.getTerminationSemaphore().acquireUninterruptibly(3);
 
             System.out.println("Qual è il suono che è stato richiamato più volte?");
             System.out.println("1)DIN");
@@ -77,8 +74,6 @@ public class NBDinDonDan {
             System.out.println("DAN:" + dati.getContaDAN());
             System.out.println("Ci vediamo la prossima volta");
         } catch (IOException ex) {
-            Logger.getLogger(NBDinDonDan.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InterruptedException ex) {
             Logger.getLogger(NBDinDonDan.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
