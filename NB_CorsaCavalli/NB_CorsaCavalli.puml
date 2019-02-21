@@ -1,0 +1,71 @@
+@startuml CorsaCavalli
+
+actor Utente
+participant main
+entity datiCondivisi
+
+Utente -> main ** : start
+
+main -> datiCondivisi ** : new
+
+main -> Th_Clop1 ** : new
+main -> Th_Clop2 ** : new
+main -> Th_Clop3 ** : new
+main -> Th_Clop4 ** : new
+main -> Th_Clop5 ** : new
+
+Utente -> main : cavallo puntato
+
+main -> Th_Clop1 ++ : start
+main -> Th_Clop2 ++ : start
+main -> Th_Clop3 ++ : start
+main -> Th_Clop4 ++ : start
+main -> Th_Clop5 ++ : start
+
+Th_Clop1 -> datiCondivisi : aggiungiLinea
+Th_Clop1 -> datiCondivisi : aggiungiLinea
+Th_Clop3 -> datiCondivisi : aggiungiLinea
+Th_Clop2 -> datiCondivisi : aggiungiLinea
+Th_Clop3 -> datiCondivisi : aggiungiLinea
+Th_Clop5 -> datiCondivisi : aggiungiLinea
+Th_Clop4 -> datiCondivisi : aggiungiLinea
+Th_Clop4 -> datiCondivisi : aggiungiLinea
+
+main -> Utente : linee
+
+Th_Clop5 -> datiCondivisi : aggiungiLinea
+Th_Clop2 -> datiCondivisi : aggiungiLinea
+Th_Clop2 -> datiCondivisi : aggiungiLinea
+
+main -> Utente : linee
+Utente -> main : termina
+
+main -> Th_Clop1 : interrupt
+main -> Th_Clop2 : interrupt
+
+Th_Clop1 -> datiCondivisi: terminationSemaphore.release()
+Th_Clop1 -> main -- : return
+
+main -> Th_Clop3 : interrupt
+
+Th_Clop2 -> datiCondivisi: terminationSemaphore.release()
+Th_Clop2 -> main -- : return
+
+Th_Clop3 -> datiCondivisi: terminationSemaphore.release()
+Th_Clop3 -> main -- : return
+
+main -> Th_Clop4 : interrupt
+
+Th_Clop4 -> datiCondivisi: terminationSemaphore.release()
+Th_Clop4 -> main -- : return
+
+main -> Th_Clop5 : interrupt
+
+Th_Clop5 -> datiCondivisi: terminationSemaphore.release()
+Th_Clop5 -> main -- : return
+
+note over main : acquire 5
+
+main -> Utente :  vincitore
+
+@enduml
