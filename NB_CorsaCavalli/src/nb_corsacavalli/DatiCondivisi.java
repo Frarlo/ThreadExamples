@@ -67,7 +67,7 @@ public class DatiCondivisi {
      */
     int primaPosizioneLibera;
 
-    Semaphore interruptionSempahore;
+    final Semaphore interruptionSempahore;
 
     /**
      * @author Galimberti_Francesco
