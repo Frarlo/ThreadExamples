@@ -5,6 +5,8 @@
  */
 package nb_corsacavalli;
 
+import java.util.concurrent.Semaphore;
+
 /**
  * @author Galimberti_Francesco
  *
@@ -65,6 +67,8 @@ public class DatiCondivisi {
      */
     int primaPosizioneLibera;
 
+    Semaphore interruptionSempahore;
+
     /**
      * @author Galimberti_Francesco
      *
@@ -81,6 +85,8 @@ public class DatiCondivisi {
 
         schermo = new String[100000];
         primaPosizioneLibera = 0;
+
+        interruptionSempahore = new Semaphore(0);
     }
 
     /**
@@ -236,4 +242,7 @@ public class DatiCondivisi {
         }
     }
 
+    public Semaphore getInterruptionSempahore() {
+        return interruptionSempahore;
+    }
 }

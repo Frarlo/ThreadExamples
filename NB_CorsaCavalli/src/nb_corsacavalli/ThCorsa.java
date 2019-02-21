@@ -125,5 +125,7 @@ public class ThCorsa extends Thread {
                 break;
 
         }
+
+        ptrDati.getInterruptionSempahore().release();
     }
 }

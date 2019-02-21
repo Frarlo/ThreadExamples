@@ -73,11 +73,7 @@ public class NB_CorsaCavalli {
             Clop5.interrupt();
 
             //attendi
-            Clop1.join();
-            Clop2.join();
-            Clop3.join();
-            Clop4.join();
-            Clop5.join();
+            dati.getInterruptionSempahore().acquireUninterruptibly(5);
 
             int max = 0;
             int cavallo = 0;
@@ -118,7 +114,7 @@ public class NB_CorsaCavalli {
             }
 
             System.out.println("Alla prossima!");
-        } catch (IOException | InterruptedException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(NB_CorsaCavalli.class.getName()).log(Level.SEVERE, null, ex);
         }
 
