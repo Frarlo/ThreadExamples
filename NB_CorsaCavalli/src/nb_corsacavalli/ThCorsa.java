@@ -14,6 +14,8 @@ import java.util.Random;
  */
 public class ThCorsa extends Thread {
 
+    private static final int NUMER_TO_WIN = 50;
+
     /**
      * @author Galimberti_Francesco
      *
@@ -81,19 +83,25 @@ public class ThCorsa extends Thread {
         int n = 0;
         Random nRand=new Random();        
         try {
-            while (true) {
-                n++;
-                ptrDati.aggiungiLinea("Clop" + nThread);
-                
-                if (usaSleep) {
-                    Thread.sleep(nRand.nextInt(100)+1);
-                }
-                if (usaYield) {
-                    Thread.yield();
-                }
+            while (!Thread.currentThread().isInterrupted()) {
+                synchronized (ptrDati.getMutex()) {
 
-                if (Thread.currentThread().isInterrupted()) {
-                    break;
+                    if (ptrDati.hasWon())
+                        break;
+
+                    n++;
+                    ptrDati.aggiungiLinea("Clop" + nThread);
+
+                    if(n >= NUMER_TO_WIN) {
+                        ptrDati.setWon(true);
+                    } else {
+                        if (usaSleep) {
+                            Thread.sleep(nRand.nextInt(100)+1);
+                        }
+                        if (usaYield) {
+                            Thread.yield();
+                        }
+                    }
                 }
             }
         } catch (InterruptedException ex) {

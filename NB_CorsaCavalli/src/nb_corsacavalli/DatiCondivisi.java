@@ -69,6 +69,11 @@ public class DatiCondivisi {
 
     private final Semaphore interruptionSempahore;
 
+
+    private final Object mutex;
+
+    private boolean won;
+
     /**
      * @author Galimberti_Francesco
      *
@@ -87,6 +92,9 @@ public class DatiCondivisi {
         primaPosizioneLibera = 0;
 
         interruptionSempahore = new Semaphore(0);
+
+        mutex = new Object();
+        won = false;
     }
 
     /**
@@ -244,5 +252,17 @@ public class DatiCondivisi {
 
     public Semaphore getInterruptionSempahore() {
         return interruptionSempahore;
+    }
+
+    public Object getMutex() {
+        return mutex;
+    }
+
+    public synchronized boolean hasWon() {
+        return won;
+    }
+
+    public synchronized void setWon(boolean won) {
+        this.won = won;
     }
 }

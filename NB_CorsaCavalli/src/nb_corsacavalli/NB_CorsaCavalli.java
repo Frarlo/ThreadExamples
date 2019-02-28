@@ -33,90 +33,71 @@ public class NB_CorsaCavalli {
      */
     public static void main(String[] args) {
 
-        try {
-            // TODO code application logic here
-            java.io.BufferedReader console = new java.io.BufferedReader(new java.io.InputStreamReader(System.in));
-            Scanner input = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);
 
-            boolean finito = false;
+        DatiCondivisi dati = new DatiCondivisi();
+        ThCorsa Clop1 = new ThCorsa(1, true, true, dati);
+        ThCorsa Clop2 = new ThCorsa(2, true, true, dati);
+        ThCorsa Clop3 = new ThCorsa(3, true, true, dati);
+        ThCorsa Clop4 = new ThCorsa(4, true, true, dati);
+        ThCorsa Clop5 = new ThCorsa(5, true, true, dati);
 
-            DatiCondivisi dati = new DatiCondivisi();
-            ThCorsa Clop1 = new ThCorsa(1, true, true, dati);
-            ThCorsa Clop2 = new ThCorsa(2, true, true, dati);
-            ThCorsa Clop3 = new ThCorsa(3, true, true, dati);
-            ThCorsa Clop4 = new ThCorsa(4, true, true, dati);
-            ThCorsa Clop5 = new ThCorsa(5, true, true, dati);
+        System.out.println("Su che cavallo punti? 1/2/3/4/5");
+        int numCav = input.nextInt();
 
-            System.out.println("Su che cavallo punti? 1/2/3/4/5");
-            int numCav = input.nextInt();
+        Clop1.start();
+        Clop2.start();
+        Clop3.start();
+        Clop4.start();
+        Clop5.start();
 
-            Clop1.start();
-            Clop2.start();
-            Clop3.start();
-            Clop4.start();
-            Clop5.start();
-
-            while (!finito) {
-                dati.visualizzaLinee();
-                String s = console.readLine();
-                if (s.endsWith(" ")) {
-                    finito = true;
-                } else {
-                    clearConsole();
-                }
-            }
-
-            Clop1.interrupt();
-            Clop2.interrupt();
-            Clop3.interrupt();
-            Clop4.interrupt();
-            Clop5.interrupt();
-
-            //attendi
-            dati.getInterruptionSempahore().acquireUninterruptibly(5);
-
-            int max = 0;
-            int cavallo = 0;
-            if (dati.getnClop1() > max) {
-                max = dati.getnClop1();
-                cavallo = 1;
-            }
-            if (dati.getnClop2() > max) {
-                max = dati.getnClop2();
-                cavallo = 2;
-            }
-            if (dati.getnClop3() > max) {
-                max = dati.getnClop3();
-                cavallo = 3;
-            }
-            if (dati.getnClop4() > max) {
-                max = dati.getnClop4();
-                cavallo = 4;
-            }
-            if (dati.getnClop5() > max) {
-                max = dati.getnClop1();
-                cavallo = 5;
-            }
-
-            System.out.println("Numero galoppi:");
-            System.out.println("Clop1 --> " + dati.getnClop1());
-            System.out.println("Clop2 --> " + dati.getnClop2());
-            System.out.println("Clop3 --> " + dati.getnClop3());
-            System.out.println("Clop4 --> " + dati.getnClop4());
-            System.out.println("Clop5 --> " + dati.getnClop5());
-            System.out.println("Cavallo vincitore: " + cavallo);
-            System.out.println("Cavallo puntato: " + numCav);
-
-            if (numCav == cavallo) {
-                System.out.println("WINNER");
-            } else {
-                System.out.println("LOSER");
-            }
-
-            System.out.println("Alla prossima!");
-        } catch (IOException ex) {
-            Logger.getLogger(NB_CorsaCavalli.class.getName()).log(Level.SEVERE, null, ex);
+        while (!dati.hasWon()) {
+            dati.visualizzaLinee();
+            clearConsole();
         }
+
+        //attendi
+        dati.getInterruptionSempahore().acquireUninterruptibly(5);
+
+        int max = 0;
+        int cavallo = 0;
+        if (dati.getnClop1() > max) {
+            max = dati.getnClop1();
+            cavallo = 1;
+        }
+        if (dati.getnClop2() > max) {
+            max = dati.getnClop2();
+            cavallo = 2;
+        }
+        if (dati.getnClop3() > max) {
+            max = dati.getnClop3();
+            cavallo = 3;
+        }
+        if (dati.getnClop4() > max) {
+            max = dati.getnClop4();
+            cavallo = 4;
+        }
+        if (dati.getnClop5() > max) {
+            max = dati.getnClop1();
+            cavallo = 5;
+        }
+
+        System.out.println("Numero galoppi:");
+        System.out.println("Clop1 --> " + dati.getnClop1());
+        System.out.println("Clop2 --> " + dati.getnClop2());
+        System.out.println("Clop3 --> " + dati.getnClop3());
+        System.out.println("Clop4 --> " + dati.getnClop4());
+        System.out.println("Clop5 --> " + dati.getnClop5());
+        System.out.println("Cavallo vincitore: " + cavallo);
+        System.out.println("Cavallo puntato: " + numCav);
+
+        if (numCav == cavallo) {
+            System.out.println("WINNER");
+        } else {
+            System.out.println("LOSER");
+        }
+
+        System.out.println("Alla prossima!");
 
     }
 
