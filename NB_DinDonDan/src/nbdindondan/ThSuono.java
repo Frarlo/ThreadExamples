@@ -5,6 +5,7 @@
  */
 package nbdindondan;
 
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -36,15 +37,33 @@ public class ThSuono extends Thread {
      * Creo classe di tipo DatiCondivi che va a contare i suoni effettuati.
      */
     DatiCondivisi ptrdati;
+    /**
+     * Semaforo usato per attendere che il suono precedente sia stato
+     * eseguito da un altro thread
+     */
+    private final Semaphore toAcquire;
+    /**
+     * Semaforo usato per segnalare a un altro thread che il suono
+     * di questo thread è stato eseguito
+     */
+    private final Semaphore toRelease;
 
     /**
-     * @param p
      * @brief Costruttore con parametri
      *
-     * @param x Gli passo il suo da eseguire
-     * @param y Scelta opzione
+     * @param x         Gli passo il suo da eseguire
+     * @param y         Scelta opzione
+     * @param p         dati condivisi tra thread
+     * @param toAcquire Semaforo usato per attendere che il suono precedente sia stato
+     *                  eseguito da un altro thread
+     * @param toRelease Semaforo usato per segnalare a un altro thread che il suono
+     *                  di questo thread è stato eseguito
      */
-    public ThSuono(String x, int y, DatiCondivisi p) {
+    public ThSuono(String x,
+                   int y,
+                   DatiCondivisi p,
+                   Semaphore toAcquire,
+                   Semaphore toRelease) {
         suono = x;
         scelta = y;
         if (scelta == 1) {
@@ -60,6 +79,9 @@ public class ThSuono extends Thread {
             faiSleep = false;
         }
         ptrdati = p;
+
+        this.toAcquire = toAcquire;
+        this.toRelease = toRelease;
     }
 
     /**
@@ -79,6 +101,9 @@ public class ThSuono extends Thread {
                 }
                 if (faiSleep == false && faiYield == true) {
                     yield();
+
+                    toAcquire.acquire();
+
                     ptrdati.aggiungi(suono);
                     if (suono.equals("DIN")) {
                         ptrdati.setContaDIN(ptrdati.getContaDIN() + 1);
@@ -89,6 +114,8 @@ public class ThSuono extends Thread {
                     if (suono.equals("DAN")) {
                         ptrdati.setContaDAN(ptrdati.getContaDAN() + 1);
                     }
+
+                    toRelease.release();
                 }
                 int min = 100;
                 int max = 1000;
